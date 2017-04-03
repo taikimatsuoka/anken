@@ -1,0 +1,12 @@
+<div class = "nested-fields">
+
+      機種
+      <%= f.text_field :model, {placeholder: "半角で入力してください", class: "form-control title-field" } %>
+      台数
+      <%= f.text_field :quantity, { placeholder: "半角で入力してください", class: "form-control title-field" } %>
+      価格
+      <%= f.text_field :price, {placeholder: "半角で入力してください", class: "form-control title-field keyword" } %>
+     
+      <%= link_to_remove_association "-", f, { class: "btn1 sakujo-btn" } %>
+
+</div>

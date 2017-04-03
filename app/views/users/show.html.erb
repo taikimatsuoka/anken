@@ -1,0 +1,32 @@
+<aside class="sidebar">  
+  <section>
+    <span class="label">プロフィール画像</span>
+    <h3 class="user-info">
+      <%= image_for(@user) %>
+    </h3>
+  </section>
+
+  <section>
+    <span class="label">ユーザー</span>
+    <h3 class="user-info"><%= @user.name %></h3>
+  </section>
+  
+  <section>
+    <span class="label">メールアドレス</span>
+    <h3 class="user-info"><%= @user.email %></h3>
+  </section>
+
+
+  <% if current_user?(@user) %>
+    <section>
+      <small><%= link_to 'プロフィールを編集', edit_user_path(@user) %></small>
+    </section>
+  <% end %>
+
+</aside>
+
+<ul class="notes">
+  <h2><%= @title %></h2>
+  <%= render @notes %>
+  <%= paginate @notes %>
+</ul>

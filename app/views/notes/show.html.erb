@@ -1,0 +1,43 @@
+<h2>マーケット</h2>
+<p><%= @note.title %></p>
+<h2>販社</h2>
+<p><%= @note.sales_company %></p>
+<h2>E/U</h2>
+<p><%= @note.end_user %></p>
+<h2>提案</h2>
+<table class ="table">
+  <thead>
+    <tr>
+      <th>機種</th>
+      <th>台数</th>
+      <th>価格</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @note.proposals.each do |proposal| %>
+<tr>
+  <td><p><%= proposal.model %></p></td>
+  <td><p><%= proposal.quantity %>台</p></td>
+  <td><p><%= number_to_currency(proposal.price, :unit => "円") %></p></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<h2>予定納期</h2>
+<p><%= @note.delivery_day %></p>
+<h2>内容</h2>
+<p><%= simple_format @note.content %></p>
+<h2>状態</h2>
+<p><%= @note.status %></p>
+
+<% if @note.miss.present? then %>
+<h2>失中理由</h2>
+<p><%= simple_format @note.miss %></p>
+<% end %>
+
+
+
+<% if current_user?(@note.user) %>
+  <%= link_to "編集", edit_note_path(@note.id), class: "btn edit-btn" %>
+  <%= link_to "削除", note_path(@note.id), method: "delete", class: "btn destroy-btn", "data-confirm" => "本当に削除しますか？" %>
+<% end %>

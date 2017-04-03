@@ -1,0 +1,163 @@
+
+
+<div class="panel panel-default">
+ <div class="panel-heading">
+    <div class="panel-title">検索</div>
+  </div>
+
+
+<div class="panel-body">
+
+<%= search_form_for(@q, method: :get, url: "#result") do |f| %>
+
+
+<div class="containers"> 
+
+
+  <div class="row">  
+    
+
+     <div class="col-sm-4">
+      <div class="form-group">
+        担当　<%= f.select :user_name_cont, User.all.map{|t| [t.name, t.name]}, :include_blank => true %>
+       
+         <div class="margin-left">市場</div>　<%= f.select :title_eq, [["医療", "医療"], ["物流", "物流"], ["小売", "小売"], ["FA", "FA"], ["その他", "その他"]], :include_blank => true %>
+       </div>
+    </div>
+  
+  
+    <div class="col-sm-4">
+      <div class="form-grup">
+          販社　<%= f.text_field :sales_company_cont, { class: "search-form-control search-title-field float" } %>
+        </div>
+    </div>
+
+  
+    <div class="col-sm-4">
+      <div class="form-group">
+          ＥＵ　<%= f.text_field :end_user_cont, { class: "search-form-control search-title-field float" } %>
+        </div>
+    </div>
+    
+    
+
+    <div class="col-sm-4">
+      <div class="form-group">
+      機種　<%= f.text_field :proposals_model_cont, { class: "search-form-control search-title-field float" }  %>
+      </div>
+    </div>
+    
+    <div class="col-sm-4">
+      <div class="form-group">
+      台数　<%= f.text_field :proposals_quantity_gteq, { class: "search-form-control search-title-field float2" } %>
+        ～ <%= f.text_field :proposals_quantity_lteq, { class: "search-form-control search-title-field float2" } %>
+      </div>
+    </div>
+      
+      <div class="col-sm-4">
+      <div class="form-group">
+      価格　<%= f.text_field :proposals_price_gteq, { class: "search-form-control search-title-field float2" } %>
+        ～  <%= f.text_field :proposals_price_lteq, { class: "search-form-control search-title-field float2" } %>
+     </div>
+    </div>
+
+
+    <div class="col-sm-4">
+      <div class="form-group">
+        納期　<%= f.text_field :delivery_day_gteq, { class: "search-form-control search-title-field datepicker float2" } %>
+         ～ <%= f.text_field :delivery_day_lteq, { class: "search-form-control search-title-field datepicker float2" } %>
+       </div>
+    </div>
+
+    
+    <div class="col-sm-12">
+      <div class="form-group">
+        内容
+        <%= f.text_area :content_cont, { class: "search-form-control content-field" } %>
+      </div>
+    </div>
+    
+     <div class = "float-right" >
+
+   <label class= "margin-left"><%= f.radio_button :status_eq, '受注' %>受注</label>
+   <label class= "margin-left"><%= f.radio_button :status_eq, '継続' %>継続</label>
+   <label class= "margin-left"><%= f.radio_button :status_eq, '失注' %>失注</label>
+   
+     <!--< %= f.check_box :status_eq , {},checked_value = "true", unchecked_value = "" %>受注-->
+     <!--< %= f.check_box :status_eq , {},checked_value = "true", unchecked_value = "" %>継続-->
+     <!--< %= f.check_box :status_eq , {},checked_value = "true", unchecked_value = "" %>失注-->
+
+
+    </div>
+    <%= f.submit '検索', class: "btn edit-btn bold" %>
+    <%= link_to "クリア", url_for, class: "btn clear-btn margin-left" %>
+    <!--< %= link_to 'CSV', import_notes_path(format: "csv"), class: 'btn csv-btn bold margin-left' %>-->
+    <!--< %= link_to "CSV", products_path(format: "csv") %> |-->
+    <%= f.button class: 'btn csv-btn margin-left', name: 'export_csv' do %>
+        <i class="fa fa-file-text"></i> CSV
+      <% end %>
+    
+    <!--< %= link_to 'CSV', params.merge({:format => :csv}), class: 'btn csv-btn bold margin-left' %>    -->
+    
+<% end %>
+
+</div>
+ </div>
+
+ 
+</div>
+ </div>
+
+<div class="spacer"></div>
+
+<div class="page-header" id="result" >
+  <h1>登録案件</h1>
+</div>
+
+<div id="searchWrapper">
+
+<table class="table table-striped">
+  
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>担当</th>
+      <th>市場</th>
+      <th>販社</th>
+      <th>EU</th>
+      <th>機種</th>
+      <th>数量</th>
+      <th>単価</th>
+      <th>納期</th>
+      <th>状態</th>
+      
+     
+    </tr>
+  </thead>
+  <tbody>
+    <% @notes.each do |note| %>
+    <% note.proposals.each do |proposal| %>
+      <tr>
+        <td><%= link_to note.id, note_path(note.id) %></td>
+        <td><%= note.user.name %></td>
+        <td><%= note.title %></td>
+        <td><%= note.sales_company %></td>
+        <td><%= note.end_user %></td>
+        <td><%= proposal.model %></td>
+        <td><%= proposal.quantity %></td>
+        <td><%= proposal.price %></td>
+        <td><%= note.delivery_day %></td>
+        <td><%= note.status %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= paginate @notes %>
+  </div>
+</div>
+
+ </div>

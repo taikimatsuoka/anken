@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>Imager案件DB</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <div id="logo"><%= link_to "Imager案件DB", root_path %></div>
+      <% if user_signed_in? %>
+        <ul class="header-right">
+          <li><%= link_to "HOME", root_path %></li>
+          <li><%= link_to "案件検索", notes_path %></li>
+          <li><%= link_to "営業一覧", users_path %></li>
+          <li><%= link_to "個人ページ", current_user %></li>
+          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      <% end %>
+    </div>
+  </header>
+  
+  <div class="container">
+    <p class="alert alert-success"><%= notice %></p>
+    <p class="alert alert-danger"><%= alert %></p>
+    <%= yield %>
+  </div>
+
+  <div class="container">
+    <footer class="footer">
+      <div class="small">
+        &copy; 株式会社 イメージャー all rights reserved. 掲載の情報・画像など、すべてのコンテンツの無断複写・転載を禁じます
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

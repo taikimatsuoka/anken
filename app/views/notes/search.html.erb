@@ -1,0 +1,163 @@
+<div class="panel panel-default">
+ <div class="panel-heading">
+    <div class="panel-title">検索</div>
+  </div>
+  <div class="panel-body">
+   
+    <%= search_form_for(@q, method: :get) do |f| %>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <%= f.label :営業担当 %>
+            <%= f.text_field :attr_name, class: "form-control", placeholder: "完全一致" %>
+          </div>
+        </div>
+        
+        <div class="col-sm-12">
+          <div class="form-group">
+            <%= f.label :営業担当 %>
+            <%= f.text_field :sales_company_eq, class: "form-control", placeholder: "完全一致" %>
+          </div>
+        </div>
+        
+        <div class="col-sm-12">
+          <div class="form-group">
+            <%= f.label :営業担当 %>
+            <%= f.text_field :end_user, class: "form-control", placeholder: "完全一致" %>
+          </div>
+        </div>
+        
+        <div class="col-sm-12">
+          <div class="form-group">
+            <%= f.label :営業担当 %>
+            <%= f.text_field :model_eq, class: "form-control", placeholder: "完全一致" %>
+          </div>
+        </div>
+        
+        <div class="col-sm-12">
+          <div class="form-group">
+            <%= f.label :営業担当 %>
+            <%= f.text_field :quantity_eq, class: "form-control", placeholder: "完全一致" %>
+          </div>
+        </div>
+        
+        <div class="col-sm-12">
+          <div class="form-group">
+            <%= f.label :営業担当 %>
+            <%= f.text_field :price_eq, class: "form-control", placeholder: "完全一致" %>
+          </div>
+        </div>
+        
+        <div class="col-sm-12">
+          <div class="form-group">
+            <%= f.label :案件詳細 %>
+            <%= f.text_field :content_cont, class: "form-control", placeholder: "部分一致" %>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <%= f.label :name_or_description_cont %>
+            <%= f.text_field :name_or_description_cont, class: "form-control", placeholder: "複数条件部分一致" %>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-inline">
+            <%= f.label :receipt_day %>
+            <%= f.date_select :delivery_day_gt, {include_blank: true, use_month_numbers: true, date_separator: ' / '}, class: "form-control" %>〜
+            <%= f.date_select :delivery_day_lt, {include_blank: true, use_month_numbers: true, date_separator: ' / '}, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <%= f.submit '検索', notes_index_path, class: "btn btn-primary" %>
+      <%= link_to 'クリア', url_for, class: "btn btn-default" %>
+    <% end %>
+  </div>
+</div>
+</div>
+
+</div>
+
+
+
+<div class="spacer"></div>
+<%- model_class = note -%>
+<div class="page-header">
+  <h1>登録案件</h1>
+</div>
+
+    <div class="row">
+  <div class="col-sm-12">
+    <%= paginate @notes %>
+  </div>
+</div>
+<table class="table table-striped">
+  
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:user) %></th>
+      <th><%= model_class.human_attribute_name(:product) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:price) %></th>
+      <th><%= model_class.human_attribute_name(:stock) %></th>
+      <th><%= model_class.human_attribute_name(:receipt_day) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @notes.each do |note| %>
+      <tr>
+  
+        <td><%= note.title %></td>
+        <td><%= note.user %></td>
+        <td><%= note.product %></td>
+        <td><%= note.content %></td>
+        <td><%= note.price %></td>
+        <td><%= note.quantity %></td>
+        <td><%= note.delivery_day %></td>
+        <td><%= note.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_note_path(note), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      note_path(note),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_note_path,
+            :class => 'btn btn-primary' %>
+
+
+
+ タイトル
+  <%= f.text_field :title, { class: "form-control title-field" } %>
+  販社
+  <%= f.text_field :sales_company, { class: "form-control title-field" } %>
+  E/U
+  <%= f.text_field :end_user, { class: "form-control title-field" } %>
+  提案機種
+  <%= f.text_field :model, { class: "form-control title-field" } %>
+  台数
+  <%= f.text_field :quantity, { class: "form-control title-field" } %>
+  価格
+  <%= f.text_field :price, { class: "form-control title-field" } %>
+  
+  予定納期
+  <%= f.text_field :delivery_day, { class: "form-control datepicker" } %>
+
+ 
+
+  <!--<!%= f.label :receipt_day %>-->
+  <!--<!%= f.date_select :delivery_day_gt, {include_blank: true, use_month_numbers: true, date_separator: ' / '}, { class: "form-control title-field" } %>~<br>-->
+  <!--<!%= f.date_select :delivery_day_lt, {include_blank: true, use_month_numbers: true, date_separator: ' / '}, { class: "form-control title-field" } %>-->
+  内容
+  <%= f.text_area :content, { class: "form-control content-field" } %>

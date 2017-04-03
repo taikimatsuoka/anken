@@ -1,0 +1,18 @@
+<% if user_signed_in? %>
+  <aside class="sidebar">
+    <%= render 'notes/form' %>
+  </aside>
+  <ul class="notes">
+    <h2>最近の投稿</h2>
+    <%= render @notes %>
+    <%= paginate @notes %>
+  </ul>
+<% else %>
+  <div class="top-wrapper">
+
+    <div class="register-wrapper">
+      <h1><%= @message %></h1>
+      <%= link_to "ログイン", new_user_session_path, class: "btn btn-large register-btn" %>
+    </div>
+  </div>
+<% end %>
