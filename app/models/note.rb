@@ -11,7 +11,7 @@ class Note < ActiveRecord::Base
 
   
   validates :title, presence: true
-  validates :content, presence: true
+  # validates :content, presence: true
   validates :user_id, presence: true
   validates :sales_company, presence: true
   validates :end_user, presence: true
@@ -53,17 +53,17 @@ class Note < ActiveRecord::Base
     # Note.create!(row.to_hash)
     # title,sales_company,end_user,user_id,delivery_day,content,status,model,quantity,price
   
-    Note.create!(:title => row[0],
-                    :sales_company => row[1],
-                    :end_user => row[2],
-                    :user_id => row[4],
-                    :delivery_day => row[3],
-                    :content => row[5],
-                    :status => row[6])
-    Proposal.create!(:model => row[7],
-                     :quantity => row[8],
-                     :price => row[9],
-                     :note_id => row[10])
+    # Note.create!(:title => row[0],
+    #                 :sales_company => row[1],
+    #                 :end_user => row[2],
+    #                 :user_id => row[4],
+    #                 :delivery_day => row[3],
+    #                 :content => row[5],
+    #                 :status => row[6])
+    Proposal.create!(:model => row[0],
+                    :quantity => row[1],
+                    :price => row[2],
+                    :note_id => row[3])
   end
   end
 

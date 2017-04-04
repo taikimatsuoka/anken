@@ -22,6 +22,15 @@
         担当　<%= f.select :user_name_cont, User.all.map{|t| [t.name, t.name]}, :include_blank => true %>
        
          <div class="margin-left">市場</div>　<%= f.select :title_eq, [["医療", "医療"], ["物流", "物流"], ["小売", "小売"], ["FA", "FA"], ["その他", "その他"]], :include_blank => true %>
+             <!--<div class = "float-right" >-->
+
+ 
+    <label class="margin-left"><%= f.check_box :status_eq_any, {multiple: true}, '受注',nil %>受注</label>
+    <label><%= f.check_box :status_eq_any, {multiple: true}, '継続',nil %>継続</label>
+    <label><%= f.check_box :status_eq_any, {multiple: true}, '失注',nil %>失注</label>
+     
+
+    <!--</div>-->
        </div>
     </div>
   
@@ -77,18 +86,7 @@
       </div>
     </div>
     
-     <div class = "float-right" >
-
-   <label class= "margin-left"><%= f.radio_button :status_eq, '受注' %>受注</label>
-   <label class= "margin-left"><%= f.radio_button :status_eq, '継続' %>継続</label>
-   <label class= "margin-left"><%= f.radio_button :status_eq, '失注' %>失注</label>
-   
-     <!--< %= f.check_box :status_eq , {},checked_value = "true", unchecked_value = "" %>受注-->
-     <!--< %= f.check_box :status_eq , {},checked_value = "true", unchecked_value = "" %>継続-->
-     <!--< %= f.check_box :status_eq , {},checked_value = "true", unchecked_value = "" %>失注-->
-
-
-    </div>
+ 
     <%= f.submit '検索', class: "btn edit-btn bold" %>
     <%= link_to "クリア", url_for, class: "btn clear-btn margin-left" %>
     <!--< %= link_to 'CSV', import_notes_path(format: "csv"), class: 'btn csv-btn bold margin-left' %>-->

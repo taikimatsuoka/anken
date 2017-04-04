@@ -5,7 +5,7 @@ class HomeController < ApplicationController
       @note.proposals.build
       @notes = Note.all.order(created_at: :desc).page(params[:page]).per(6).includes(:proposals)
     else
-      @message = "Imeger営業報告db"
+      @message = "Imager案件DB"
     end
   end
   
