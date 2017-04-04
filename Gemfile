@@ -6,7 +6,10 @@ source 'https://rubygems.org'
   # railsのgem
   gem 'rails', '4.2.1'
   # sqlite3データベースのgem
-  gem 'sqlite3', '1.3.10'
+  gem 'sqlite3', '1.3.10', group: :development
+  # gem 'sqlite3', group: :development
+# 本番ではpostgressを使用する
+  gem 'pg', group: :production
   # SCSSスタイルシートのgem
   gem 'sass-rails', '5.0.3'
   # JavaScript assetの圧縮用のgem
