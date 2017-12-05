@@ -8,10 +8,15 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def show
-    @notes = @user.notes.order(created_at: :desc).page(params[:page]).per(5)
-    @title = "投稿一覧"
-  end
+    def show
+    @q        = @user.notes.ransack(:status_eq => "提案", :delivery_day_lt => Date.today)
+    @reminders = @q
+                  .result(distinct: true)
+                  .order(updated_at: :desc)
+                  .page(params[:page]).per(5)
+    @notes = @user.notes.order(updated_at: :desc).page(params[:page]).per(5)
+    @title = "さんの案件一覧"
+    end
 
   def edit
   end

@@ -4,9 +4,29 @@
     <meta charset="UTF-8">
   </head>
   <body>
-    <h1>新しい記事「<%= @title %> 」を投稿しました。</h1>
-    <p>
-      投稿しました。<br />
-    </p>
+<p>[販社]　<%= @note.sales_company %></p>
+<p>[E/U]　<%= @note.end_user %></p>
+<table class ="table">
+  <thead>
+    <tr>
+      <th>機種</th>
+      <th>台数</th>
+      <th>価格</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @note.proposals.each do |proposal| %>
+<tr>
+  <td><p><%= proposal.model %></p></td>
+  <td><p><%= proposal.quantity %>台</p></td>
+  <td><p>@<%= number_to_currency(proposal.price, :unit => "")%></p></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<p>[予定納期]　<%= @note.delivery_day %></p>
+<p>[内容]</p>
+<p><%= simple_format @note.content %></p>
+
   </body>
 </html>

@@ -43,10 +43,16 @@
 
 /* ユーザーのshowページ ================================ */
 .sidebar { 
-  width: 34%;
+  width: 45%;
   float: left;
   margin-bottom: 30px;
   margin-right: 10%;
+}
+.userSidebar { 
+  width: 30%;
+  float: left;
+  margin-bottom: 30px;
+  margin-right: 5%;
 }
 
 .label {
@@ -56,3 +62,16 @@
 .user-info {
   margin: 10px 0 30px 0;
 }
+
+.userReminder{
+  color: #146C78;
+}
+
+#noteSendCheck{
+  float: left;
+  margin: 24px 19px 0 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+

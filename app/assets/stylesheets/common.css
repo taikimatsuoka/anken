@@ -19,7 +19,7 @@ a:hover {
   color: #1b7ccd; }
 
 .container {
-  width: 980px;
+  width: 1100px;
   margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
@@ -68,10 +68,15 @@ p {
   font-weight: bold; }
 
 #logo a {
-  color: #fff; }
+  color: #fff;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  
+}
 
 #logo a:hover {
-  color: #fff;
+  /*text-shadow: #FF6F6F 0px 0px 10px;*/
+  color: #FF6F6F;
   text-decoration: none; }
 
 .header-right {
@@ -82,6 +87,10 @@ p {
   color: white;
   display: block;
   text-decoration: none; }
+
+ .header-right a:hover {
+  color: #FF6F6F;
+  }
 
 .header-right li {
   line-height: 65px;
@@ -157,7 +166,8 @@ footer small {
 }
 
 .sakujo-btn:hover {
-  background-color: #F73F52;
+  background-color: #F85F73;
+  color: white;
   text-decoration: none;
 }
 
@@ -178,6 +188,16 @@ footer small {
   background-color: #28b086;
   color: white;
   text-decoration: none; }
+
+.back-btn {
+  background-color: #364F6B;
+  margin-bottom: 15px; }
+
+.back-btn:hover {
+  background-color: #3E6B89;
+  color: white;
+  text-decoration: none; }
+
   
   .clear-btn {
   background-color: #C9D6DF;
@@ -1064,4 +1084,12 @@ table th[class*="col-"] {
 
 .profile_img{
   width: 56px;
+}
+
+#result{
+  padding-top: 40px;
+}
+
+.hankaku{
+  ime-mode: disabled;
 }

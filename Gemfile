@@ -50,3 +50,9 @@ source 'https://rubygems.org'
   gem 'simple_form'
   
   gem 'roo'
+  
+  gem 'delayed_job_active_record'
+  gem "daemons"
+  
+  gem 'record_with_operator'
+  

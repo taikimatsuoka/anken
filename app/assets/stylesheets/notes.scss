@@ -3,7 +3,7 @@
 .notes {
   margin: 0;
   float: left;
-  width: 50%;
+  width: 40%;
 }
 .notes h2 {
   margin-top: 0;
@@ -14,6 +14,20 @@
   border-bottom: 1px solid #eaeaea;
 }
 
+.userNotes {
+  margin: 0;
+  float: left;
+  width: 27%;
+  margin-right: 5%;
+}
+.userNotes h2 {
+  margin-top: 0;
+}
+.userNotes li {
+  overflow: auto;
+  padding: 14px 0;
+  border-bottom: 1px solid #eaeaea;
+}
 /* 投稿 ================================ */
 .notes .title, .notes .content {
   display: block;
@@ -24,6 +38,23 @@
 }
 
 .notes img {
+  display: inline-block;
+  margin-right: 6%;
+  margin-bottom: 6%;
+  float: left;
+  width:56px;
+  height:56px;
+}
+
+.userNotes .title, .userNotes .content {
+  display: block;
+}
+
+.userNotes .title {
+  padding-top: 8px;
+}
+
+.userNotes img {
   display: inline-block;
   margin-right: 6%;
   margin-bottom: 6%;
@@ -129,3 +160,23 @@
 // }
 
 // a
+
+.show-background h2{
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  background: #4BA2AC;
+  color: white;
+  padding: 9px;
+  border-radius: 12px;
+   -webkit-box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 6px -6px rgba(0, 0, 0, 0.2);
+}
+.show-background p{
+    background-color: #F3F3F3;
+    padding: 9px;
+    font-size: 1.1em;
+    border-radius: 13px;
+    line-height: 1.7em;
+    box-shadow: aliceblue;
+}

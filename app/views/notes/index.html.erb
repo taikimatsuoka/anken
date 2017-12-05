@@ -21,12 +21,13 @@
       <div class="form-group">
         担当　<%= f.select :user_name_cont, User.all.map{|t| [t.name, t.name]}, :include_blank => true %>
        
-         <div class="margin-left">市場</div>　<%= f.select :title_eq, [["医療", "医療"], ["物流", "物流"], ["小売", "小売"], ["FA", "FA"], ["その他", "その他"]], :include_blank => true %>
+         <div class="margin-left">市場</div>　<%= f.select :title_eq, [["医療", "医療"], ["物流", "物流"], ["小売", "小売"], ["FA", "FA"], ["レンタル", "レンタル"], ["その他", "その他"]], :include_blank => true %>
              <!--<div class = "float-right" >-->
 
  
-    <label class="margin-left"><%= f.check_box :status_eq_any, {multiple: true}, '受注',nil %>受注</label>
+    <label class="margin-left"><%= f.check_box :status_eq_any, {multiple: true}, '提案',nil %>提案</label>
     <label><%= f.check_box :status_eq_any, {multiple: true}, '継続',nil %>継続</label>
+    <label><%= f.check_box :status_eq_any, {multiple: true}, '受注',nil %>受注</label>
     <label><%= f.check_box :status_eq_any, {multiple: true}, '失注',nil %>失注</label>
      
 
@@ -77,7 +78,6 @@
          ～ <%= f.text_field :delivery_day_lteq, { class: "search-form-control search-title-field datepicker float2" } %>
        </div>
     </div>
-
     
     <div class="col-sm-12">
       <div class="form-group">
@@ -85,7 +85,19 @@
         <%= f.text_area :content_cont, { class: "search-form-control content-field" } %>
       </div>
     </div>
-    
+    <div class="col-sm-4">
+      <div class="form-group">
+      総合　<%= f.text_field :sales_company_or_end_user_or_content_cont, {placeholder: "企業名を入力すると対象案件の総合検索が出来ます。", class: "search-form-control search-title-field float" }  %>
+      </div>
+    </div>
+     <div class="col-sm-4">
+          <div class="form-group">
+            登録　<%= f.text_field :created_at_gteq, {placeholder: "案件登録日を検索出来ます。", class: "search-form-control search-title-field datepicker float2" } %>
+             ～ <%= f.text_field :created_at_lteq, {placeholder: "+1日で検索してください。", class: "search-form-control search-title-field datepicker float2" } %>
+           </div>
+        </div>
+         
+
  
     <%= f.submit '検索', class: "btn edit-btn bold" %>
     <%= link_to "クリア", url_for, class: "btn clear-btn margin-left" %>
@@ -106,10 +118,11 @@
 </div>
  </div>
 
-<div class="spacer"></div>
+<!--<div class="spacer" id="result"></div>-->
+<div id="result"></div>
 
-<div class="page-header" id="result" >
-  <h1>登録案件</h1>
+<div class="page-header">
+  <h1>案件数　<%= @number.count %>件</h1>
 </div>
 
 <div id="searchWrapper">
@@ -119,7 +132,7 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>担当</th>
+      <th width="33px">担当</th>
       <th>市場</th>
       <th>販社</th>
       <th>EU</th>
@@ -143,7 +156,7 @@
         <td><%= note.end_user %></td>
         <td><%= proposal.model %></td>
         <td><%= proposal.quantity %></td>
-        <td><%= proposal.price %></td>
+        <td><%= number_to_currency(proposal.price, :unit => "") %></td>
         <td><%= note.delivery_day %></td>
         <td><%= note.status %></td>
       </tr>

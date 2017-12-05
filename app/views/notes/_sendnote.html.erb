@@ -1,4 +1,4 @@
-<li>  
+<li>
   <%= image_for(note.user) %>
   <span class="user-name">
     <%= link_to "案件ID：" + note.id.to_s, note_path(note.id) %>　<%= note.user.name+"さん" %>
@@ -14,5 +14,3 @@
     
 
 </li>
-
-

@@ -3,9 +3,9 @@
       機種
       <%= f.text_field :model, {placeholder: "半角で入力してください", class: "form-control title-field" } %>
       台数
-      <%= f.text_field :quantity, { placeholder: "半角で入力してください", class: "form-control title-field" } %>
+      <%= f.telephone_field :quantity, { placeholder: "半角で入力してください", class: "form-control title-field hankaku" } %>
       価格
-      <%= f.text_field :price, {placeholder: "半角で入力してください", class: "form-control title-field keyword" } %>
+      <%= f.telephone_field :price, {placeholder: "半で入力してください", class: "form-control title-field hankaku" } %>
      
       <%= link_to_remove_association "-", f, { class: "btn1 sakujo-btn" } %>
 

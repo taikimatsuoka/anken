@@ -11,15 +11,23 @@ class Note < ActiveRecord::Base
 
   
   validates :title, presence: true
-  # validates :content, presence: true
+  validates :content, presence: true
   validates :user_id, presence: true
   validates :sales_company, presence: true
   validates :end_user, presence: true
   validates :delivery_day, presence: true
   validates :status, presence: true
-  # validates :proposals, presence: true
+  validates :proposals, presence: true
+  records_with_operator_on :update
 
+  def previous
+    Note.where("id < ?", self.id).order("id DESC").first
+  end
 
+  def next
+    Note.where("id > ?", self.id).order("id ASC").first
+  end  
+  
   def self.to_csv
   csv_data = CSV.generate("", {:row_sep => "\r\n", :force_quotes => true}) do |csv|
   csv_column_names = %w(ID 担当 市場 販社 EU 機種 台数 価格 納期 状態)

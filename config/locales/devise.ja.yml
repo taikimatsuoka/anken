@@ -19,6 +19,7 @@ ja:
       locked: 'あなたのアカウントは凍結されています。'
 #      locked: 'Your account is locked.'
       invalid: 'メールアドレスかパスワードが違います。'
+      not_found_in_database: "ユーザー登録されていません。泰樹まで連絡ください。"
 #      invalid: 'Invalid email or password.'
       invalid_token: '認証キーが不正です。'
 #      invalid_token: 'Invalid authentication token.'

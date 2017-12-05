@@ -13,7 +13,7 @@
   <% end %>
 
   市場<br>
-  <%= f.select :title, [["医療", "医療"], ["物流", "物流"], ["小売", "小売"], ["FA", "FA"], ["その他", "その他"]], :include_blank => true %><br>
+  <%= f.select :title, [["医療", "医療"], ["物流", "物流"], ["小売", "小売"], ["FA", "FA"], ["レンタル", "レンタル"], ["その他", "その他"]], :include_blank => true %><br>
   <!--< %= f.text_field :title, { class: "form-control title-field" } %>-->
   販社
   <%= f.text_field :sales_company, { class: "form-control title-field" } %>
@@ -27,7 +27,7 @@
     <% end %>
     
     <div id="links">
-      <%= link_to_add_association "+", f, :proposals, { class: "btn2 destroy-btn" } %>
+      <%= link_to_add_association "提案機種を追加", f, :proposals, { class: "btn2 destroy-btn" } %>
     </div>
      
     
@@ -35,13 +35,14 @@
   <%= f.text_field :delivery_day, { class: "form-control title-field datepicker" } %>
   内容
   <%= f.text_area :content, { class: "form-control content-field" } %>
-  
+
+<label><%= f.radio_button :status, '提案' %>提案</label>  
+<label><%= f.radio_button :status, '継続' %>継続</label>
 <label><%= f.radio_button :status, '受注' %>受注</label>
-<label><%= f.radio_button :status, '継続', :checked => true %>継続</label>
 <label id="login-show" class="login"><%= f.radio_button :status, '失注' %>失注</label>
 
   <br>
-  <%= f.submit "保存", { class: "btn primary-btn" } %>
+  <%= f.submit "保存", class: "btn primary-btn", data: { disable_with: '保存中･･･' } %>
 
 
 

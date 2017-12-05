@@ -1,5 +1,9 @@
-<h2>案件ID</h2>
-<p><%= @note.id %></p>
+<%= link_to "前画面に戻る", :back, class: "btn back-btn" %>
+<% if @note.previous %><%= link_to "前案件へ", note_path(@note.previous), class: "btn back-btn" %><% end %>
+<% if @note.next %><%= link_to "次案件へ", note_path(@note.next), class: "btn back-btn" %><% end %>
+<div class="show-background">
+<h2>担当・案件ID・登録日</h2>
+<p><%= @note.user.name %>さん　案件ID：<%= @note.id %>　登録日：<%= @note.created_at.strftime("%Y年%m月%d日") %></p>
 <h2>マーケット</h2>
 <p><%= @note.title %></p>
 <h2>販社</h2>
@@ -13,6 +17,7 @@
       <th>機種</th>
       <th>台数</th>
       <th>価格</th>
+      <th>案件規模</th>
     </tr>
   </thead>
   <tbody>
@@ -20,7 +25,8 @@
 <tr>
   <td><p><%= proposal.model %></p></td>
   <td><p><%= proposal.quantity %>台</p></td>
-  <td><p><%= number_to_currency(proposal.price, :unit => "円") %></p></td>
+  <td><p>@<%= number_to_currency(proposal.price, :unit => "")%></p></td>
+  <td><p><%= number_to_currency(proposal.price*proposal.quantity, :unit => "円") %></p></td>
   </tr>
 <% end %>
 </tbody>
@@ -28,18 +34,23 @@
 <h2>予定納期</h2>
 <p><%= @note.delivery_day %></p>
 <h2>内容</h2>
-<p><%= simple_format @note.content %></p>
+<%= simple_format @note.content %>
 <h2>状態</h2>
 <p><%= @note.status %></p>
 
 <% if @note.miss.present? then %>
-<h2>失中理由</h2>
-<p><%= simple_format @note.miss %></p>
+<h2>失注理由</h2>
+<%= simple_format @note.miss %>
+<% end %>
+
+<% if @note.updated_by? %>
+<h2>最終更新</h2>
+<p><%= User.find(@note.updated_by).name %>さん 　更新日 <%= @note.updated_at.strftime("%Y年%m月%d日") %></p>
 <% end %>
 
 
+</div>
 
-<% if current_user?(@note.user) %>
+
   <%= link_to "編集", edit_note_path(@note.id), class: "btn edit-btn" %>
   <%= link_to "削除", note_path(@note.id), method: "delete", class: "btn destroy-btn", "data-confirm" => "本当に削除しますか？" %>
-<% end %>

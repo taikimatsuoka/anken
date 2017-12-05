@@ -38,17 +38,29 @@ Rails.application.configure do
 
 
 
-config.action_mailer.raise_delivery_errors = true
-config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = {
-  address:  'smtp.gmail.com',
-  port:  587,
-  domain:  'smtp.gmail.com',
-  user_name:  't.m4tsuok4@gmail.com',
-  password:  'snsd0310',
-  authentication:  :login,
-  enable_starttls_auto:  true
-}
-  
+# config.action_mailer.raise_delivery_errors = true
+# config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+# config.action_mailer.delivery_method = :smtp
+# config.action_mailer.smtp_settings = {
+#   address:  'smtp.gmail.com',
+#   port:  587,
+#   domain:  'smtp.gmail.com',
+#   user_name:  'imagerdbaddresssendonly20i7@gmail.com',
+#   password:  'rvwv28g4RmnmNMW',
+#   authentication:  :login,
+#   enable_starttls_auto:  true
+# }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => 'smtp.gmail.com',
+    :port => 587,
+    :domain => 'gmail.com',
+    :user_name => 'imagerdbaddresssendonly20i7@gmail.com',
+    :password => 'pnqebeefdrpmpiff', 
+    :authentication => :login,
+    :enable_starttls_auto => true
+  }
+
 end

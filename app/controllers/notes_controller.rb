@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!
-  before_action :correct_user, only: [:edit, :update]
+  # before_action :correct_user, only: [:edit, :update]
   before_action :set_note, only: [:show, :edit, :update, :destroy ]
  
 
@@ -9,7 +9,8 @@ class NotesController < ApplicationController
   
 
     def index
-    
+    @q        = Note.ransack(params[:q])
+    @number = @q.result(distinct: true).order(created_at: :desc)
     if params[:export_csv]
     @q        = Note.ransack(params[:q])
     @notes    = @q.result(distinct: true).order(created_at: :desc)
@@ -26,19 +27,16 @@ class NotesController < ApplicationController
 
  def create
     @note = current_user.notes.build(note_params)
-    # respond_to do |format|
+   
       if @note.save
-        # 擬似的なUser構造体を作成する
-      # 	user = User.new("mail",@note)
-      #   # 保存後にUserMailerを使用してwelcomeメールを送信
-      #   NoteMailer.note_email(user, @note).deliver
-        
+      	user = User.new("mail",@note)
+        NoteMailer.delay.note_email(user, @note)
       redirect_to @note, notice: "案件が保存されました"
       else
-        @notes = Note.all.order(created_at: :desc)
+        @notes = Note.all.order(created_at: :desc).page(params[:page]).per(6)
         render 'home/top'
-    # end 
-      end
+      end 
+   
  end
 
   def edit
@@ -46,6 +44,7 @@ class NotesController < ApplicationController
 
   def update
     if @note.update(note_params)
+      NoteMailer.delay.note_email(current_user,@note)
       redirect_to @note, notice: "案件が更新されました"
     else
       render :edit
@@ -60,9 +59,6 @@ class NotesController < ApplicationController
   def import
   
   Note.import(params[:file])
-  
-  # Note.proposals.import(params[:file])
-
   redirect_to root_path, notice: '案件をインポートしました'
   end
     # def import
@@ -81,11 +77,6 @@ class NotesController < ApplicationController
       @note = Note.find(params[:id])
     end
     
-    # def set_notes
-    #   @q        = Note.ransack(params[:q])
-    #   @notes    = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(5)
-    # end
-   
     
     def note_params
       params.require(:note).permit(:title, :sales_company,
