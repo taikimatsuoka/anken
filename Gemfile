@@ -55,4 +55,6 @@ source 'https://rubygems.org'
   gem "daemons"
   
   gem 'record_with_operator'
+  gem 'rails_12factor', group: :production
   
+  ruby "2.3.0"
