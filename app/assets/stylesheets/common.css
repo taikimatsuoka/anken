@@ -58,7 +58,7 @@ p {
   left: 0;
   position: fixed;
   margin-bottom: 20px;
-  z-index: 99;}
+  z-index: 99; }
 
 #logo {
   float: left;
@@ -340,7 +340,7 @@ input, textarea, select {
   color: inherit;
 }
 
-}
+
 .panel-heading + .list-group .list-group-item:first-child {
   border-top-width: 0;
 }
@@ -647,7 +647,7 @@ table {
   .table-bordered td {
     border: 1px solid #ddd !important;
   }
-}
+
 
 table {
   background-color: transparent;
@@ -729,6 +729,7 @@ table col[class*="col-"] {
   display: table-column;
   float: none;
 }
+
 table td[class*="col-"],
 table th[class*="col-"] {
   position: static;
