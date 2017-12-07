@@ -25,6 +25,8 @@ source 'https://rubygems.org'
   # hirbの出力を日本語に対応させるgem
   gem 'hirb-unicode'
   
+
+
   
 
   gem 'ransack'
